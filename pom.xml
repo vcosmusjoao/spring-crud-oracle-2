@@ -39,11 +39,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
@@ -95,11 +90,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-	   <plugin>
-	       <groupId>com.microsoft.azure</groupId>
-	       <artifactId>azure-webapp-maven-plugin</artifactId>
-	       <version>1.9.1</version>
-	   </plugin>
         </plugins>
     </build>
 
