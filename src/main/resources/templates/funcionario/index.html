@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Funcionarios</title>
+</head>
+<body>
+
+<div layout:fragment="body">
+    <h1 class="mb-4 mt-4">Funcionarios</h1>
+
+    <p th:if="${msg != null}" th:text="${msg}" class="mb-4 alert alert-success"></p>
+
+    <table class="table">
+        <tr>
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Cargo</th>
+            <th>Loja</th>
+            <th colspan="2">Açoes</th>
+        </tr>
+        <tr th:each="funcionario:${funcionarios}">
+            <td th:text="${funcionario.getCodFuncionario()}"></td>
+            <td th:text="${funcionario.getNomeFuncionario()}"></td>
+            <td th:text="${funcionario.getCpf()}"></td>
+            <td th:text="${funcionario.getCargo()}"></td>
+            <td th:text="${funcionario.getLojaDeRoupa().getNomeLoja()}"></td>
+            <td>
+                <form th:action="@{/funcionario/excluir/}+${funcionario.getCodFuncionario()}" method="post" class="form-inline">
+                    <a th:href="@{/funcionario/editar/}+${funcionario.getCodFuncionario()}" class="btn btn-outline-primary mr-2">Editar</a>
+                    <button type="submit" class="btn btn-outline-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a class="btn btn-outline-primary mr-2" th:href="@{/funcionario/cadastrar}">Cadastrar Funcionario</a>
+    <a th:href="@{/}" class="btn btn-outline-danger">Voltar</a>
+</div>
+
+</body>
+</html>

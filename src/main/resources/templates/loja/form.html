@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Fromulario Loja</title>
+</head>
+<body>
+
+
+<div layout:fragment="body">
+
+    <form class="mt-4" th:action="@{/loja/cadastrar}" method="post" th:object="${lojaDeRoupa}">
+
+        <input th:field="*{codLoja}" type="hidden">
+
+        <div class="form-group">
+            <label for="nomeLoja">Nome da Loja</label>
+            <input th:field="*{nomeLoja}" type="text" class="form-control" id="nomeLoja">
+        </div>
+        <div class="form-group">
+            <label for="qntFuncionarios">Quantidade de Funcionarios</label>
+            <input th:field="*{qntFuncionarios}" type="number" class="form-control" id="qntFuncionarios">
+        </div>
+        <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input th:field="*{endereco}" type="text" class="form-control" id="endereco">
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input th:field="*{telefone}" type="number" class="form-control" id="telefone">
+        </div>
+        <select class="form-control mb-2" th:field="*{categoria}">
+            <option value="option1">Selecione uma categoria</option>
+            <option th:each="categoria : ${T(br.com.gallium.core.model.Categoria).values()}"
+                    th:value="${categoria}"
+                    th:text="${categoria}">
+            </option>
+        </select>
+        <button type="submit" class="btn btn-outline-success mr-2">Cadastrar</button>
+        <a th:href="@{/}" class="btn btn-outline-danger">Voltar</a>
+    </form>
+</div>
+
+</body>
+</html>

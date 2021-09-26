@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Lojas</title>
+
+</head>
+<body>
+
+<div layout:fragment="body">
+    <h1 class="mb-4 mt-4">Lojas</h1>
+
+    <p th:if="${msg != null}" th:text="${msg}" class="mb-4 alert alert-success"></p>
+
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Funcionarios</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Categoria</th>
+            <th colspan="2">Açoes</th>
+        </tr>
+        <tr th:each="loja:${lojasDeRoupa}">
+            <td th:text="${loja.nomeLoja}"></td>
+            <td>
+                <a th:href="@{/loja/}+${loja.getCodLoja()}+@{/funcionarios}">Funcionarios</a>
+            </td>
+            <td th:text="${loja.endereco}"></td>
+            <td th:text="${loja.telefone}"></td>
+            <td th:text="${loja.categoria}"></td>
+            <td>
+
+                <form th:action="@{/loja/excluir/}+${loja.codLoja}" method="post" class="form-inline">
+                    <a th:href="@{/loja/editar/}+${loja.codLoja}" class="btn btn-outline-primary mr-2">Editar</a>
+                    <button type="submit" class="btn btn-outline-danger">Excluir</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <p>*Excuindo a loja, voce excluirá todos os seus funcionários</p>
+    <a class="btn btn-outline-primary" th:href="@{/loja/cadastrar}">Cadastrar Loja</a>
+
+</div>
+
+</body>
+</html>

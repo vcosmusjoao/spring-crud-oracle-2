@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Fromulario Funcionario</title>
+</head>
+<body>
+
+
+<div layout:fragment="body">
+
+    <form class="mt-4" th:action="@{/funcionario/cadastrar}" method="post" th:object="${funcionario}">
+
+        <input th:field="*{codFuncionario}" type="hidden">
+
+        <div class="form-group">
+            <label for="nomeFuncionario">Nome do Funcionario</label>
+            <input th:field="*{nomeFuncionario}" type="text" class="form-control" id="nomeFuncionario">
+        </div>
+        <div class="form-group">
+            <label for="cpf">Cpf</label>
+            <input th:field="*{cpf}" type="number" class="form-control" id="cpf">
+        </div>
+        <label for="cargo">Cargo</label>
+        <select class="form-control mb-2" th:field="*{cargo}" id="cargo">
+            <option value="option1">Selecione uma categoria</option>
+            <option th:each="cargo : ${T(br.com.gallium.core.model.Cargo).values()}"
+                    th:value="${cargo}"
+                    th:text="${cargo}">
+            </option>
+        </select>
+        <label for="loja">Loja</label>
+        <select class="form-control mb-2" name="codLoja" id="loja" required>
+            <option value="option1">Selecione uma Loja</option>
+            <option th:each="lojaDeRoupa : ${lojasDeRoupa}"
+                    th:value="${lojaDeRoupa.getCodLoja()}"
+                    th:text="${lojaDeRoupa.getNomeLoja()}">
+            </option>
+        </select>
+        <button type="submit" class="btn btn-outline-success mr-2">Cadastrar</button>
+    </form>
+</div>
+
+</body>
+</html>
